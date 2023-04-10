@@ -131,7 +131,7 @@ for epoch in range(num_epochs):
         cnn_model.zero_grad()
 
         # Make the bag of words vector for stemmed tokens 
-        bow_vec = make_word2vec_vector_cnn(row['stemmed_tokens'], max_sen_len, padding_idx, w2vmodel, device)
+        bow_vec = make_word2vec_vector_model(row['stemmed_tokens'], max_sen_len, padding_idx, w2vmodel, device)
        
         # Forward pass to get output
         probs = cnn_model(bow_vec)
@@ -172,7 +172,7 @@ for epoch in range(num_epochs):
     total_test = 0
     with torch.no_grad():
         for index, row in X_test.iterrows():
-            bow_vec_test = make_word2vec_vector_cnn(row['stemmed_tokens'], max_sen_len, padding_idx, w2vmodel, device)
+            bow_vec_test = make_word2vec_vector_model(row['stemmed_tokens'], max_sen_len, padding_idx, w2vmodel, device)
             probs_test = cnn_model(bow_vec_test)
             #_, predicted_test = torch.max(probs_test.data, 1)
             
