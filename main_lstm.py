@@ -64,11 +64,6 @@ top_data_df_small = get_top_data(top_n=10000)
 
 # Data preprocessing
 # ==================================================================================
-# # Removing the stop words (Not required here, as that would remove necessary info.)
-# from gensim.parsing.preprocessing import remove_stopwords
-# print(remove_stopwords("Restaurant had a really good service!!"))
-# print(remove_stopwords("I did not like the food!!"))
-# print(remove_stopwords("This product is not good!!"))
 
 # Tokenization
 # ==============================================================
@@ -109,6 +104,8 @@ HIDDEN_DIM = 128
 
 print('LSTM model generating.......')
 lstm_model = LSTMTextClassifier(vocab_size=VOCAB_SIZE, num_classes=NUM_CLASSES, hidden_size = HIDDEN_DIM)
+num_params = sum(p.numel() for p in lstm_model.parameters())
+print(f"Number of parameters in the model: {num_params}")
 lstm_model.to(device)
 
 loss_function = nn.CrossEntropyLoss()
