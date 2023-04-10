@@ -105,6 +105,11 @@ VOCAB_SIZE = len(w2vmodel.wv.vocab)
 
 print('CNN model generating.......')
 cnn_model = CnnTextClassifier(vocab_size=VOCAB_SIZE, num_classes=NUM_CLASSES)
+
+# Number of parameters
+num_params = sum(p.numel() for p in cnn_model.parameters())
+print(f"Number of parameters in the model: {num_params}")
+
 cnn_model.to(device)
 loss_function = nn.CrossEntropyLoss()
 optimizer = optim.Adam(cnn_model.parameters(), lr=0.001)
